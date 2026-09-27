@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Materia, Masa y Densidad · Gran Infografía Interactiva</title>
+  <meta name="description" content="Infografía didáctica, colorida e interactiva sobre Materia y Cuerpo, Masa vs Peso, Volumen y Densidad con mini laboratorios y actividades prácticas." />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Outfit, Quicksand, Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Quicksand:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Outfit"', 'sans-serif'],
+            fun: ['"Quicksand"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              blue: '#0284C7',
+              navy: '#1E3A8A',
+              coral: '#FF6B4A',
+              amber: '#F59E0B',
+              emerald: '#10B981',
+              violet: '#8B5CF6',
+              rose: '#F43F5E',
+              cyan: '#06B6D4',
+            },
+            posterBlue: {
+              light: '#E6F3FC',
+              border: '#BDE0F8',
+              badge: '#173B66',
+            },
+            posterWarm: {
+              light: '#FBF1E4',
+              border: '#EED9C1',
+              badge: '#A24E1F',
+            },
+            posterGreen: {
+              light: '#E3F3EB',
+              border: '#C2E5D1',
+              text: '#135431',
+            }
+          },
+          boxShadow: {
+            'glow-blue': '0 10px 25px -5px rgba(2, 132, 199, 0.25)',
+            'glow-coral': '0 10px 25px -5px rgba(255, 107, 74, 0.25)',
+            'glow-emerald': '0 10px 25px -5px rgba(16, 185, 129, 0.25)',
+            'card-soft': '0 12px 32px -8px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background: linear-gradient(180deg, #F8FAFC 0%, #F1F5F9 50%, #FAF5FF 100%);
+      min-height: 100vh;
+    }
+
+    .bg-mesh {
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(2, 132, 199, 0.08) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(245, 158, 11, 0.08) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(139, 92, 246, 0.05) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.08) 0px, transparent 50%);
+    }
+
+    /* Partículas de confeti */
+    .confetti-particle {
+      position: absolute;
+      pointer-events: none;
+      border-radius: 4px;
+      animation: popConfetti 0.8s ease-out forwards;
+      z-index: 9999;
+    }
+    @keyframes popConfetti {
+      0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 1; }
+      100% { transform: translate(var(--dx), var(--dy)) scale(0.2) rotate(360deg); opacity: 0; }
+    }
+
+    /* Animación del tanque de agua */
+    .water-surface {
+      background: linear-gradient(180deg, rgba(56, 189, 248, 0.35) 0%, rgba(2, 132, 199, 0.55) 100%);
+      transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .floating-item {
+      transition: all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* Scrollbar personalizada */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F1F5F9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 9999px;
+      border: 2px solid #F1F5F9;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94A3B8;
+    }
+
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white !important; }
+      .shadow-card-soft { box-shadow: none !important; border: 1px solid #E2E8F0 !important; }
+    }
+  </style>
+</head>
+
+<body class="bg-mesh text-slate-800 font-sans antialiased selection:bg-brand-coral selection:text-white relative">
+
+  <!-- ============================================================== -->
+  <!-- BARRA DE NAVEGACIÓN Y PROGRESO INTEGRADA                       -->
+  <!-- ============================================================== -->
+  <nav class="no-print sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200/80 px-4 sm:px-6 py-3 transition-all shadow-sm">
+    <div class="max-w-6xl mx-auto flex items-center justify-between gap-4">
+      
+      <!-- Logo y Título -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brand-blue via-brand-violet to-brand-coral flex items-center justify-center text-white text-xl shadow-md group-hover:scale-105 transition">
+          🔬
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+            <span class="text-[11px] font-black uppercase tracking-wider text-brand-coral font-fun">Ciencias Interactivas</span>
+          </div>
+          <h1 class="text-base sm:text-lg font-black text-slate-900 font-display leading-none">
+            Materia, Masa y Densidad
+          </h1>
+        </div>
+      </a>
+
+      <!-- Accesos Rápidos de Secciones -->
+      <div class="hidden lg:flex items-center gap-1.5 text-xs font-bold text-slate-600">
+        <a href="#materia-cuerpo" class="px-3 py-1.5 rounded-full hover:bg-sky-100 hover:text-sky-800 transition">1. Materia y Cuerpo</a>
+        <a href="#masa-peso" class="px-3 py-1.5 rounded-full hover:bg-emerald-100 hover:text-emerald-800 transition">2. Masa vs Peso</a>
+        <a href="#volumen" class="px-3 py-1.5 rounded-full hover:bg-amber-100 hover:text-amber-800 transition">3. Volumen</a>
+        <a href="#densidad" class="px-3 py-1.5 rounded-full hover:bg-purple-100 hover:text-purple-800 transition">4. Densidad</a>
+        <a href="#calcular" class="px-3 py-1.5 rounded-full hover:bg-rose-100 hover:text-rose-800 transition">5. Calcular</a>
+        <a href="#probeta" class="px-3 py-1.5 rounded-full hover:bg-cyan-100 hover:text-cyan-800 transition">6. Arquímedes</a>
+        <a href="#recordar" class="px-3.5 py-1.5 rounded-full bg-amber-500 text-white hover:bg-amber-600 transition shadow-sm font-extrabold flex items-center gap-1">
+          ⭐ 7. Resumen
+        </a>
+      </div>
+
+      <!-- Botón de Imprimir / PDF -->
+      <button id="btn-nav-print" onclick="window.print()" class="inline-flex items-center gap-1.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs px-3.5 py-2 rounded-xl transition shadow-sm">
+        <span>🖨️</span> <span class="hidden sm:inline">Imprimir / PDF</span>
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- ============================================================== -->
+  <!-- CONTENEDOR PRINCIPAL FLUIDO E INTEGRADO                        -->
+  <!-- ============================================================== -->
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-16">
+
+    <!-- ============================================================== -->
+    <!-- PORTADA / HERO VIBRANTE Y DIDÁCTICO                             -->
+    <!-- ============================================================== -->
+    <header class="relative rounded-3xl bg-gradient-to-br from-[#EBF5FC] via-[#FFF9F2] to-[#F5EEFB] border-2 border-slate-200/90 p-8 sm:p-14 overflow-hidden shadow-card-soft">
+      
+      <!-- Figuras decorativas de fondo -->
+      <div class="absolute -top-12 -right-12 w-64 h-64 bg-amber-300/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-12 -left-12 w-72 h-72 bg-sky-300/20 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="relative z-10 max-w-3xl">
+        
+        <!-- Badge Superior -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-amber-200 shadow-sm text-xs font-black uppercase tracking-wider text-amber-700 mb-5">
+          <span class="animate-bounce">🚀</span> Objeto Digital de Aprendizaje · Física y Química
+        </div>
+
+        <!-- Título Principal con Gradiente Llamativo -->
+        <h1 class="text-4xl sm:text-6xl font-black text-slate-900 font-display leading-[1.08] tracking-tight mb-4">
+          MATERIA, MASA <br/>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue via-brand-coral to-brand-amber">
+            Y DENSIDAD
+          </span>
+        </h1>
+
+        <!-- Pregunta Conductora -->
+        <p class="text-xl sm:text-2xl font-black text-slate-800 font-fun mb-4 flex items-center gap-2">
+          ¿Por qué algunos objetos son más pesados que otros? 🤔
+        </p>
+
+        <!-- Párrafo Informativo -->
+        <p class="text-slate-600 text-base sm:text-lg mb-8 leading-relaxed font-medium">
+          Explora, observa y descubre cómo podemos conocer las características de los objetos que nos rodean mediante mini laboratorios interactivos, simuladores en tiempo real y experimentos guiados.
+        </p>
+
+        <!-- Botones de Acción -->
+        <div class="flex flex-wrap items-center gap-4">
+          <a href="#materia-cuerpo" id="btn-hero-start" class="inline-flex items-center gap-2.5 bg-gradient-to-r from-brand-coral to-rose-500 hover:from-rose-500 hover:to-brand-coral text-white font-extrabold text-base px-7 py-3.5 rounded-2xl shadow-glow-coral hover:-translate-y-0.5 transition duration-200">
+            <span>✨</span> ¡Comenzar el Viaje Científico!
+          </a>
+          <span class="text-xs font-bold text-slate-600 bg-white/80 backdrop-blur-sm px-4 py-2.5 rounded-xl border border-slate-200 shadow-sm flex items-center gap-2">
+            <span>🎮</span> Con Mini Actividades Interactivas en Cada Paso
+          </span>
+        </div>
+
+      </div>
+
+      <!-- Imagen Destacada del Laboratorio -->
+      <div class="mt-10 rounded-2xl overflow-hidden border-2 border-white shadow-lg relative group">
+        <img src="./images/hero_science.jpg" alt="Laboratorio de ciencias interactivo" class="w-full h-auto max-h-[380px] object-cover rounded-2xl group-hover:scale-[1.01] transition duration-300" />
+        <div class="absolute bottom-3 left-3 bg-white/95 backdrop-blur-md px-4 py-2 rounded-xl border border-slate-200 shadow-sm text-xs font-black text-slate-800 flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          ¡Bienvenido al laboratorio de descubrimiento de la materia!
+        </div>
+      </div>
+
+    </header>
+
+
+    <!-- ============================================================== -->
+    <!-- 1. SECCIÓN: MATERIA Y CUERPO (CON MINI ACTIVIDAD CLASIFICADORA)-->
+    <!-- ============================================================== -->
+    <section id="materia-cuerpo" class="scroll-mt-20 bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-card-soft">
+      
+      <!-- Encabezado de Sección -->
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-8 pb-4 border-b border-slate-100">
+        <div class="flex items-center gap-3">
+          <span class="w-10 h-10 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center font-black text-base">01</span>
+          <div>
+            <span class="text-xs font-black uppercase tracking-wider text-sky-700 font-fun">Concepto Fundamental</span>
+            <h2 class="text-2xl sm:text-3xl font-black text-slate-900 font-display">Materia y Cuerpo</h2>
+          </div>
+        </div>
+        <span class="text-xs font-bold text-slate-500 bg-slate-100 px-3 py-1.5 rounded-xl">
+          Todo cuerpo está formado por materia
+        </span>
+      </div>
+
+      <!-- EL PÓSTER COMPARATIVO INTEGRADO (ESTILO EXACTO DEL EJEMPLO) -->
+      <div class="rounded-3xl bg-slate-50/70 p-4 sm:p-8 border border-slate-200 mb-8">
+        
+        <div class="text-center mb-8">
+          <h3 class="text-3xl sm:text-4xl font-black text-[#173B66] font-display">
+            Materia y cuerpo
+          </h3>
+          <p class="text-lg font-bold text-slate-600 font-fun mt-1">
+            Todo cuerpo está formado por materia
+          </p>
+        </div>
+
+        <!-- 2 Columnas de Comparación (Azul vs Ocre) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+          
+          <!-- COLUMNA MATERIA (AZUL) -->
+          <div class="bg-posterBlue-light border-2 border-posterBlue-border rounded-3xl p-6 flex flex-col justify-between shadow-sm">
+            <div>
+              <div class="flex justify-center mb-5">
+                <span class="bg-posterBlue-badge text-white text-lg font-black font-fun px-8 py-2 rounded-2xl shadow-sm tracking-wide">
+                  Materia
+                </span>
+              </div>
+
+              <p class="text-center text-slate-800 text-sm sm:text-base font-bold leading-relaxed mb-6">
+                La materia es todo aquello que tiene masa y ocupa un lugar en el espacio.
+              </p>
+
+              <!-- 3 Ejemplos Visuales con Fotos Reales -->
+              <div class="grid grid-cols-3 gap-2 sm:gap-3 mb-6">
+                
+                <!-- Agua -->
+                <div class="bg-white rounded-2xl p-2 text-center border border-white/80 shadow-sm flex flex-col items-center">
+                  <div class="w-full aspect-square rounded-xl overflow-hidden bg-sky-50 mb-1.5 flex items-center justify-center p-1">
+                    <img src="./images/materia_agua.jpg" alt="Agua" class="w-full h-full object-contain" />
+                  </div>
+                  <h5 class="font-black text-slate-900 text-xs sm:text-sm font-fun">Agua</h5>
+                  <span class="text-[9px] sm:text-[10px] text-slate-500 font-semibold leading-tight">(líquido)</span>
+                </div>
+
+                <!-- Piedra -->
+                <div class="bg-white rounded-2xl p-2 text-center border border-white/80 shadow-sm flex flex-col items-center">
+                  <div class="w-full aspect-square rounded-xl overflow-hidden bg-slate-100 mb-1.5 flex items-center justify-center p-1">
+                    <img src="./images/materia_piedra.jpg" alt="Piedra" class="w-full h-full object-contain" />
+                  </div>
+                  <h5 class="font-black text-slate-900 text-xs sm:text-sm font-fun">Piedra</h5>
+                  <span class="text-[9px] sm:text-[10px] text-slate-500 font-semibold leading-tight">(sólido)</span>
+                </div>
+
+                <!-- Aire -->
+                <div class="bg-white rounded-2xl p-2 text-center border border-white/80 shadow-sm flex flex-col items-center">
+                  <div class="w-full aspect-square rounded-xl overflow-hidden bg-sky-100/40 mb-1.5 flex items-center justify-center p-1">
+                    <img src="./images/materia_aire.jpg" alt="Aire" class="w-full h-full object-contain" />
+                  </div>
+                  <h5 class="font-black text-slate-900 text-xs sm:text-sm font-fun">Aire</h5>
+                  <span class="text-[9px] sm:text-[10px] text-slate-500 font-semibold leading-tight">(gaseoso)</span>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Píldora Inferior -->
+            <div class="bg-white/80 rounded-xl p-3 text-center border border-white shadow-sm text-xs font-bold text-slate-700">
+              La materia se presenta en diferentes estados: <strong>sólido, líquido y gaseoso</strong>.
+            </div>
+          </div>
+
+          <!-- COLUMNA CUERPO (OCRE/CÁLIDO) -->
+          <div class="bg-posterWarm-light border-2 border-posterWarm-border rounded-3xl p-6 flex flex-col justify-between shadow-sm">
+            <div>
+              <div class="flex justify-center mb-5">
+                <span class="bg-posterWarm-badge text-white text-lg font-black font-fun px-8 py-2 rounded-2xl shadow-sm tracking-wide">
+                  Cuerpo
+                </span>
+              </div>
+
+              <p class="text-center text-slate-800 text-sm sm:text-base font-bold leading-relaxed mb-6">
+                Un cuerpo es una porción de materia que tiene forma y límites definidos.
+              </p>
+
+              <!-- 3 Ejemplos Visuales con Fotos Reales -->
+              <div class="grid grid-cols-3 gap-2 sm:gap-3 mb-6">
+                
+                <!-- Vaso -->
+                <div class="bg-white rounded-2xl p-2 text-center border border-white/80 shadow-sm flex flex-col items-center">
+                  <div class="w-full aspect-square rounded-xl overflow-hidden bg-amber-50/50 mb-1.5 flex items-center justify-center p-1">
+                    <img src="./images/cuerpo_vaso.jpg" alt="Vaso" class="w-full h-full object-contain" />
+                  </div>
+                  <h5 class="font-black text-slate-900 text-xs sm:text-sm font-fun">Vaso</h5>
+                  <span class="text-[9px] sm:text-[10px] text-slate-500 font-semibold leading-tight">(de vidrio)</span>
+                </div>
+
+                <!-- Silla -->
+                <div class="bg-white rounded-2xl p-2 text-center border border-white/80 shadow-sm flex flex-col items-center">
+                  <div class="w-full aspect-square rounded-xl overflow-hidden bg-amber-50/50 mb-1.5 flex items-center justify-center p-1">
+                    <img src="./images/cuerpo_silla.jpg" alt="Silla" class="w-full h-full object-contain" />
+                  </div>
+                  <h5 class="font-black text-slate-900 text-xs sm:text-sm font-fun">Silla</h5>
+                  <span class="text-[9px] sm:text-[10px] text-slate-500 font-semibold leading-tight">(de madera)</span>
+                </div>
+
+                <!-- Pelota -->
+                <div class="bg-white rounded-2xl p-2 text-center border border-white/80 shadow-sm flex flex-col items-center">
+                  <div class="w-full aspect-square rounded-xl overflow-hidden bg-slate-100 mb-1.5 flex items-center justify-center p-1">
+                    <img src="./images/cuerpo_pelota.jpg" alt="Pelota" class="w-full h-full object-contain" />
+                  </div>
+                  <h5 class="font-black text-slate-900 text-xs sm:text-sm font-fun">Pelota</h5>
+                  <span class="text-[9px] sm:text-[10px] text-slate-500 font-semibold leading-tight">(de cuero)</span>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Píldora Inferior -->
+            <div class="bg-white/80 rounded-xl p-3 text-center border border-white shadow-sm text-xs font-bold text-slate-700">
+              Los cuerpos están formados por materia y tienen <strong>diferentes formas, tamaños y colores</strong>.
+            </div>
+          </div>
+
+        </div>
+
+        <!-- FRANJA DE RESUMEN VERDE (EXACTA DEL EJEMPLO) -->
+        <div class="mt-6 bg-posterGreen-light border-2 border-posterGreen-border rounded-2xl p-4 sm:p-5 text-center">
+          <p class="text-posterGreen-text text-sm sm:text-lg font-black font-fun leading-relaxed">
+            En resumen: la materia es el <span class="underline decoration-emerald-500 decoration-2">“qué”</span> (de qué está hecho), y el cuerpo es el <span class="underline decoration-emerald-500 decoration-2">“cómo”</span> (la forma en que se presenta).
+          </p>
+        </div>
+
+      </div>
+
+      <!-- LOS 4 OBJETOS DE LA TAREA ESCOLAR (Piedra, Botella, Lápiz, Moneda) -->
+      <div class="mb-8">
+        <h4 class="text-xs font-black uppercase tracking-wider text-slate-500 mb-3 flex items-center gap-2">
+          <span>🎒</span> Cuerpos Clave de tu Tarea Escolar:
+        </h4>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          
+          <div class="bg-white p-3.5 rounded-2xl border border-slate-200 text-center shadow-sm flex flex-col items-center hover:-translate-y-1 transition">
+            <div class="w-16 h-16 rounded-xl overflow-hidden mb-2 bg-slate-50 p-1 flex items-center justify-center">
+              <img src="./images/materia_piedra.jpg" alt="Piedra" class="w-full h-full object-contain" />
+            </div>
+            <span class="font-black text-slate-800 text-xs font-fun">Piedra</span>
+            <span class="text-[10px] text-slate-500 font-semibold">Mineral natural</span>
+          </div>
+
+          <div class="bg-white p-3.5 rounded-2xl border border-slate-200 text-center shadow-sm flex flex-col items-center hover:-translate-y-1 transition">
+            <div class="w-16 h-16 rounded-xl overflow-hidden mb-2 bg-sky-50 p-1 flex items-center justify-center">
+              <img src="./images/cuerpo_vaso.jpg" alt="Botella" class="w-full h-full object-contain" />
+            </div>
+            <span class="font-black text-slate-800 text-xs font-fun">Botella</span>
+            <span class="text-[10px] text-slate-500 font-semibold">Vidrio / Plástico</span>
+          </div>
+
+          <div class="bg-white p-3.5 rounded-2xl border border-slate-200 text-center shadow-sm flex flex-col items-center hover:-translate-y-1 transition">
+            <div class="w-16 h-16 rounded-xl overflow-hidden mb-2 bg-amber-50 p-1 flex items-center justify-center">
+              <img src="./images/cuerpo_lapiz.jpg" alt="Lápiz" class="w-full h-full object-contain" />
+            </div>
+            <span class="font-black text-slate-800 text-xs font-fun">Lápiz</span>
+            <span class="text-[10px] text-slate-500 font-semibold">Madera y grafito</span>
+          </div>
+
+          <div class="bg-white p-3.5 rounded-2xl border border-slate-200 text-center shadow-sm flex flex-col items-center hover:-translate-y-1 transition">
+            <div class="w-16 h-16 rounded-xl overflow-hidden mb-2 bg-amber-50 p-1 flex items-center justify-center">
+              <img src="./images/cuerpo_moneda.jpg" alt="Moneda" class="w-full h-full object-contain" />
+            </div>
+            <span class="font-black text-slate-800 text-xs font-fun">Moneda</span>
+            <span class="text-[10px] text-slate-500 font-semibold">Metal conductor</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PREGUNTA INTERACTIVA EXACTA DE LA TAREA -->
+      <div class="rounded-2xl bg-gradient-to-r from-amber-50 via-white to-sky-50 border-2 border-amber-200 p-5 sm:p-7 shadow-sm mb-6">
+        <div class="flex items-start gap-3 mb-4">
+          <div class="w-9 h-9 rounded-xl bg-amber-500 text-white flex items-center justify-center font-black text-lg shrink-0">
+            ❓
+          </div>
+          <div>
+            <span class="text-[11px] font-black uppercase tracking-wider text-amber-800 block">Pregunta de Exploración:</span>
+            <h4 class="text-base sm:text-lg font-black text-slate-900 font-display">
+              ¿Cuál de estos objetos está formado por materia?
+            </h4>
+          </div>
+        </div>
+
+        <!-- Botones de Opciones -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-4" id="quiz-materia-opts">
+          <button id="btn-q-materia-0" onclick="responderQuizMateria(0, event)" class="q-mat-btn px-4 py-3 rounded-xl border border-slate-200 bg-white font-bold text-xs sm:text-sm text-slate-700 hover:border-amber-400 hover:bg-amber-50/50 transition flex items-center justify-center gap-1.5 shadow-sm">
+            <img src="./images/icon_piedra.png" class="w-5 h-5 object-contain inline-block align-middle" alt="Piedra" /> Piedra
+          </button>
+          <button id="btn-q-materia-1" onclick="responderQuizMateria(1, event)" class="q-mat-btn px-4 py-3 rounded-xl border border-slate-200 bg-white font-bold text-xs sm:text-sm text-slate-700 hover:border-amber-400 hover:bg-amber-50/50 transition flex items-center justify-center gap-1.5 shadow-sm">
+            ✏️ Lápiz
+          </button>
+          <button id="btn-q-materia-2" onclick="responderQuizMateria(2, event)" class="q-mat-btn px-4 py-3 rounded-xl border border-slate-200 bg-white font-bold text-xs sm:text-sm text-slate-700 hover:border-amber-400 hover:bg-amber-50/50 transition flex items-center justify-center gap-1.5 shadow-sm">
+            🍶 Botella
+          </button>
+          <button id="btn-q-materia-3" onclick="responderQuizMateria(3, event)" class="q-mat-btn px-4 py-3 rounded-xl border border-slate-200 bg-white font-bold text-xs sm:text-sm text-slate-700 hover:border-amber-400 hover:bg-amber-50/50 transition flex items-center justify-center gap-1.5 shadow-sm">
+            ✨ Todos los anteriores
+          </button>
+        </div>
+
+        <!-- Feedback Dinámico (Oculto inicialmente) -->
+        <div id="quiz-materia-feedback" class="hidden p-3.5 rounded-xl border font-semibold text-xs sm:text-sm flex items-center gap-2.5 transition">
+        </div>
+      </div>
+
+      <!-- MINI ACTIVIDAD 1: CLASIFICADOR INTERACTIVO "¿MATERIA O CUERPO?" -->
+      <div class="rounded-2xl bg-sky-50/80 border-2 border-sky-200 p-5 sm:p-6">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs font-black uppercase tracking-wider text-sky-800 font-fun flex items-center gap-2">
+            <span>🎮</span> Mini Actividad 1: Clasificador Rápido
+          </span>
+          <span class="text-[11px] font-bold text-slate-500">Haz clic para descubrir</span>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-700 font-medium mb-4">
+          Toca cualquier tarjeta cotidiana para revelar si representa la sustancia fundamental (<strong>Materia</strong>) o un objeto delimitado con forma propia (<strong>Cuerpo</strong>):
+        </p>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5" id="clasificador-grid">
+          
+          <button id="btn-clasif-madera" onclick="clasificarItem('madera')" class="btn-clasif p-3 bg-white hover:bg-sky-50 border border-slate-200 rounded-xl text-left transition shadow-sm flex items-center justify-between">
+            <span class="font-bold text-xs sm:text-sm text-slate-800 flex items-center gap-1.5">
+              <img src="./images/icon_madera.png" class="w-5 h-5 object-contain inline-block" alt="Madera" /> Madera en bruto
+            </span>
+            <span id="badge-madera" class="text-[10px] font-black text-slate-400 bg-slate-100 px-2 py-0.5 rounded">Tocar</span>
+          </button>
+
+          <button id="btn-clasif-mesa" onclick="clasificarItem('mesa')" class="btn-clasif p-3 bg-white hover:bg-amber-50 border border-slate-200 rounded-xl text-left transition shadow-sm flex items-center justify-between">
+            <span class="font-bold text-xs sm:text-sm text-slate-800 flex items-center gap-1.5">
+              🪑 Mesa de comedor
+            </span>
+            <span id="badge-mesa" class="text-[10px] font-black text-slate-400 bg-slate-100 px-2 py-0.5 rounded">Tocar</span>
+          </button>
+
+          <button id="btn-clasif-oro" onclick="clasificarItem('oro')" class="btn-clasif p-3 bg-white hover:bg-sky-50 border border-slate-200 rounded-xl text-left transition shadow-sm flex items-center justify-between">
+            <span class="font-bold text-xs sm:text-sm text-slate-800 flex items-center gap-1.5">
+              <img src="./images/icon_oro.png" class="w-5 h-5 object-contain inline-block" alt="Oro" /> Oro fundido
+            </span>
+            <span id="badge-oro" class="text-[10px] font-black text-slate-400 bg-slate-100 px-2 py-0.5 rounded">Tocar</span>
+          </button>
+
+          <button id="btn-clasif-anillo" onclick="clasificarItem('anillo')" class="btn-clasif p-3 bg-white hover:bg-amber-50 border border-slate-200 rounded-xl text-left transition shadow-sm flex items-center justify-between">
+            <span class="font-bold text-xs sm:text-sm text-slate-800 flex items-center gap-1.5">
+              💍 Anillo de oro
+            </span>
+            <span id="badge-anillo" class="text-[10px] font-black text-slate-400 bg-slate-100 px-2 py-0.5 rounded">Tocar</span>
+          </button>
+
+          <button id="btn-clasif-vidrio" onclick="clasificarItem('vidrio')" class="btn-clasif p-3 bg-white hover:bg-sky-50 border border-slate-200 rounded-xl text-left transition shadow-sm flex items-center justify-between">
+            <span class="font-bold text-xs sm:text-sm text-slate-800 flex items-center gap-1.5">
+              🧪 Vidrio fundido
+            </span>
+            <span id="badge-vidrio" class="text-[10px] font-black text-slate-400 bg-slate-100 px-2 py-0.5 rounded">Tocar</span>
+          </button>
+
+          <button id="btn-clasif-copa" onclick="clasificarItem('copa')" class="btn-clasif p-3 bg-white hover:bg-amber-50 border border-slate-200 rounded-xl text-left transition shadow-sm flex items-center justify-between">
+            <span class="font-bold text-xs sm:text-sm text-slate-800 flex items-center gap-1.5">
+              🥂 Copa de cristal
+            </span>
+            <span id="badge-copa" class="text-[10px] font-black text-slate-400 bg-slate-100 px-2 py-0.5 rounded">Tocar</span>
+          </button>
+
+        </div>
+
+        <div id="clasificador-info" class="mt-3 p-3 rounded-xl bg-white border border-sky-200 text-xs font-semibold text-slate-700">
+          💡 <em>Haz clic en las tarjetas de arriba para ver la distinción práctica en el mundo real.</em>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ============================================================== -->
+    <!-- 2. SECCIÓN: MASA Y PESO (CON MINI LABORATORIO GRAVITATORIO)    -->
+    <!-- ============================================================== -->
+    <section id="masa-peso" class="scroll-mt-20 bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-card-soft">
+      
+      <div class="flex items-center gap-3 mb-2">
+        <span class="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-black text-base">02</span>
+        <div>
+          <span class="text-xs font-black uppercase tracking-wider text-emerald-700 font-fun">Comparativa Científica</span>
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 font-display">Masa y Peso no son lo mismo</h2>
+        </div>
+      </div>
+      <p class="text-slate-500 text-sm mb-8">Descubre por qué la balanza mide una cosa y el dinamómetro otra muy diferente.</p>
+
+      <!-- Grid de 2 Tarjetas Vibrantes -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        
+        <!-- MASA (Verde Menta) -->
+        <div class="rounded-3xl bg-gradient-to-b from-emerald-50/90 to-white border-2 border-emerald-200 p-6 sm:p-8 flex flex-col justify-between shadow-sm">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-3.5 py-1 rounded-full bg-emerald-600 text-white font-black text-xs font-fun tracking-wide">
+                Propiedad de la Materia
+              </span>
+              <span class="text-xs font-extrabold text-emerald-800 bg-emerald-100 px-3 py-1 rounded-lg">
+                Unidad: kilogramo (kg)
+              </span>
+            </div>
+            <h3 class="text-2xl font-black text-slate-900 font-display mb-2 flex items-center gap-2">
+              ⚖️ La Masa
+            </h3>
+            <p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-6 font-medium">
+              Es la <strong>cantidad de materia</strong> que contiene un cuerpo. ¡Es fija e invariable en cualquier planeta del universo!
+            </p>
+          </div>
+
+          <div class="bg-white rounded-2xl p-4 border border-emerald-200 text-center shadow-inner">
+            <span class="text-3xl block mb-1">⚖️</span>
+            <span class="text-xs font-extrabold text-emerald-900">Se puede medir con una balanza.</span>
+          </div>
+        </div>
+
+        <!-- PESO (Azul Cielo) -->
+        <div class="rounded-3xl bg-gradient-to-b from-sky-50/90 to-white border-2 border-sky-200 p-6 sm:p-8 flex flex-col justify-between shadow-sm">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-3.5 py-1 rounded-full bg-brand-blue text-white font-black text-xs font-fun tracking-wide">
+                Fuerza Dinámica
+              </span>
+              <span class="text-xs font-extrabold text-sky-800 bg-sky-100 px-3 py-1 rounded-lg">
+                Unidad: newton (N)
+              </span>
+            </div>
+            <h3 class="text-2xl font-black text-slate-900 font-display mb-2 flex items-center gap-2">
+              🧭 El Peso
+            </h3>
+            <p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-6 font-medium">
+              Es la <strong>fuerza que ejerce la gravedad</strong> sobre un cuerpo. Cambia según el lugar donde te encuentres.
+            </p>
+          </div>
+
+          <div class="bg-white rounded-2xl p-4 border border-sky-200 text-center shadow-inner">
+            <span class="text-3xl block mb-1">🪝</span>
+            <span class="text-xs font-extrabold text-sky-900">Se puede medir con un dinamómetro.</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- BANNER RECUERDA -->
+      <div class="rounded-2xl bg-amber-500 text-white p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm mb-6">
+        <div class="flex items-center gap-3">
+          <span class="text-3xl">💡</span>
+          <div>
+            <span class="text-xs font-black uppercase tracking-wider text-amber-100 block">RECUERDA</span>
+            <p class="font-extrabold text-sm sm:text-base">
+              Masa = cantidad de materia (kg).  |  Peso = fuerza de gravedad (N).
+            </p>
+          </div>
+        </div>
+        <button id="btn-toggle-astro" onclick="toggleAstronauta()" class="bg-white text-amber-800 hover:bg-amber-50 font-black px-4 py-2.5 rounded-xl text-xs transition shadow shrink-0">
+          🧑‍🚀 Ver Ejemplo del Astronauta
+        </button>
+      </div>
+
+      <!-- EJEMPLO INTERACTIVO DEL ASTRONAUTA CON FOTO -->
+      <div class="rounded-3xl border-2 border-sky-200 bg-white p-3 sm:p-4 shadow-sm mb-6">
+        <div class="rounded-2xl overflow-hidden relative mb-4">
+          <img src="./images/astronaut_earth_moon.jpg" alt="Astronauta en Tierra y Luna" class="w-full h-auto max-h-[380px] object-cover rounded-2xl" />
+        </div>
+
+        <div id="card-astronauta-detail" class="p-4 sm:p-6 rounded-2xl bg-slate-900 text-white">
+          <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-700">
+            <h4 class="font-black text-amber-400 text-sm sm:text-base font-fun flex items-center gap-2">
+              🧑‍🚀 Caso Real: Una persona con una masa de 72 kg
+            </h4>
+            <span class="text-xs text-slate-400 font-mono">P = m · g</span>
+          </div>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-center">
+            <div class="bg-slate-800 p-4 rounded-xl border border-slate-700">
+              <span class="text-2xl block mb-1">🌍</span>
+              <h5 class="font-bold text-sky-400 text-sm">En la Tierra</h5>
+              <p class="text-xs text-slate-300 mt-1">Masa = <strong>72 kg</strong></p>
+              <p class="text-xs text-slate-300">Peso = <strong>~706 N</strong> (g = 9.8 m/s²)</p>
+              <span class="inline-block mt-2 text-[10px] bg-sky-900/60 text-sky-200 px-2 py-0.5 rounded">Gravedad estándar</span>
+            </div>
+
+            <div class="bg-slate-800 p-4 rounded-xl border border-slate-700">
+              <span class="text-2xl block mb-1">🌕</span>
+              <h5 class="font-bold text-amber-400 text-sm">En la Luna</h5>
+              <p class="text-xs text-slate-300 mt-1">Masa = <strong>72 kg (¡mantiene la misma masa!)</strong></p>
+              <p class="text-xs text-slate-300">Peso = <strong>~117 N (la gravedad es 6 veces menor)</strong></p>
+              <span class="inline-block mt-2 text-[10px] bg-amber-900/60 text-amber-200 px-2 py-0.5 rounded">¡Puede dar saltos gigantes!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MINI ACTIVIDAD 2: SIMULADOR DE GRAVEDAD INTERPLANETARIA -->
+      <div class="rounded-2xl bg-emerald-50 border-2 border-emerald-300 p-5 sm:p-6">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs font-black uppercase tracking-wider text-emerald-900 font-fun flex items-center gap-2">
+            <span>🎮</span> Mini Actividad 2: Simulador Planetario en Vivo
+          </span>
+          <span class="text-[11px] font-bold text-emerald-700">Persona de 72 kg</span>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-700 font-medium mb-4">
+          Selecciona un destino espacial para ver cómo la <strong>masa permanece fija</strong> mientras el <strong>peso en Newtons cambia</strong> de inmediato:
+        </p>
+
+        <!-- Botones de Planetas -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-4">
+          <button id="btn-grav-tierra" onclick="simularGravedad('tierra')" class="btn-grav p-3 rounded-xl border-2 border-emerald-500 bg-white font-black text-xs text-slate-800 hover:bg-emerald-100 transition text-center shadow-sm">
+            🌍 Tierra (9.8 m/s²)
+          </button>
+          <button id="btn-grav-luna" onclick="simularGravedad('luna')" class="btn-grav p-3 rounded-xl border border-slate-200 bg-white font-bold text-xs text-slate-700 hover:bg-emerald-100 transition text-center shadow-sm">
+            🌕 Luna (1.6 m/s²)
+          </button>
+          <button id="btn-grav-marte" onclick="simularGravedad('marte')" class="btn-grav p-3 rounded-xl border border-slate-200 bg-white font-bold text-xs text-slate-700 hover:bg-emerald-100 transition text-center shadow-sm">
+            🔴 Marte (3.7 m/s²)
+          </button>
+          <button id="btn-grav-espacio" onclick="simularGravedad('espacio')" class="btn-grav p-3 rounded-xl border border-slate-200 bg-white font-bold text-xs text-slate-700 hover:bg-emerald-100 transition text-center shadow-sm">
+            🌌 Espacio (0 m/s²)
+          </button>
+        </div>
+
+        <!-- Pantalla Digital del Sensor -->
+        <div class="p-4 rounded-xl bg-slate-900 text-white flex flex-col sm:flex-row items-center justify-around gap-4 text-center">
+          <div>
+            <span class="text-[11px] uppercase tracking-wider text-slate-400 block">Lectura en Balanza (Masa)</span>
+            <span id="sim-masa-val" class="text-2xl sm:text-3xl font-mono font-black text-emerald-400">72.0 kg</span>
+            <span class="text-[10px] text-emerald-300 block font-bold">¡INVARIABLE!</span>
+          </div>
+          <div class="h-8 w-[1px] bg-slate-700 hidden sm:block"></div>
+          <div>
+            <span class="text-[11px] uppercase tracking-wider text-slate-400 block">Lectura en Dinamómetro (Peso = m · g)</span>
+            <span id="sim-peso-val" class="text-2xl sm:text-3xl font-mono font-black text-amber-400">705.6 N</span>
+            <span id="sim-peso-desc" class="text-[10px] text-amber-300 block font-bold">Atracción gravitatoria normal</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ============================================================== -->
+    <!-- 3. SECCIÓN: VOLUMEN (CON CALCULADORA EN VIVO DE FIGURAS 3D)    -->
+    <!-- ============================================================== -->
+    <section id="volumen" class="scroll-mt-20 bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-card-soft">
+      
+      <div class="flex items-center gap-3 mb-2">
+        <span class="w-10 h-10 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center font-black text-base">03</span>
+        <div>
+          <span class="text-xs font-black uppercase tracking-wider text-amber-700 font-fun">Geometría Espacial</span>
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 font-display">¿Qué es el Volumen?</h2>
+        </div>
+      </div>
+      <p class="text-slate-700 text-base font-medium mb-6">
+        El <strong>volumen</strong> es el espacio tridimensional que ocupa un cuerpo.
+      </p>
+
+      <!-- Instrucción del botón -->
+      <div class="flex items-center justify-between mb-4">
+        <span class="text-xs font-black uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+          <span>📐</span> BOTÓN: ELIGE UNA FIGURA (Al seleccionar cada figura aparece su fórmula):
+        </span>
+      </div>
+
+      <!-- 4 Cuerpos Geométricos Interactivos -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-5">
+        
+        <!-- CUBO -->
+        <button onclick="seleccionarFigura('cubo')" id="card-geo-cubo" class="card-geo cursor-pointer bg-slate-50 hover:bg-amber-50/70 border-2 border-amber-400 bg-amber-50/40 rounded-2xl p-4 text-center transition shadow-sm hover:-translate-y-1">
+          <span class="text-4xl block mb-2">🧊</span>
+          <h4 class="font-black text-slate-900 text-sm sm:text-base font-fun">Cubo</h4>
+          <span class="inline-block bg-amber-200/80 text-amber-900 font-mono font-black text-xs px-2.5 py-1 rounded-lg mt-2">
+            V = a³
+          </span>
+        </button>
+
+        <!-- PRISMA RECTANGULAR -->
+        <button onclick="seleccionarFigura('prisma')" id="card-geo-prisma" class="card-geo cursor-pointer bg-slate-50 hover:bg-sky-50/70 border-2 border-slate-200 rounded-2xl p-4 text-center transition shadow-sm hover:-translate-y-1">
+          <span class="text-4xl block mb-2">📦</span>
+          <h4 class="font-black text-slate-900 text-sm sm:text-base font-fun">Prisma</h4>
+          <span class="inline-block bg-sky-100 text-sky-900 font-mono font-black text-xs px-2.5 py-1 rounded-lg mt-2">
+            V = l × w × h
+          </span>
+        </button>
+
+        <!-- CILINDRO -->
+        <button onclick="seleccionarFigura('cilindro')" id="card-geo-cilindro" class="card-geo cursor-pointer bg-slate-50 hover:bg-emerald-50/70 border-2 border-slate-200 rounded-2xl p-4 text-center transition shadow-sm hover:-translate-y-1">
+          <span class="text-4xl block mb-2">🥫</span>
+          <h4 class="font-black text-slate-900 text-sm sm:text-base font-fun">Cilindro</h4>
+          <span class="inline-block bg-emerald-100 text-emerald-900 font-mono font-black text-xs px-2.5 py-1 rounded-lg mt-2">
+            V = πr²h
+          </span>
+        </button>
+
+        <!-- ESFERA -->
+        <button onclick="seleccionarFigura('esfera')" id="card-geo-esfera" class="card-geo cursor-pointer bg-slate-50 hover:bg-purple-50/70 border-2 border-slate-200 rounded-2xl p-4 text-center transition shadow-sm hover:-translate-y-1">
+          <span class="text-4xl block mb-2">⚽</span>
+          <h4 class="font-black text-slate-900 text-sm sm:text-base font-fun">Esfera</h4>
+          <span class="inline-block bg-purple-100 text-purple-900 font-mono font-black text-xs px-2.5 py-1 rounded-lg mt-2">
+            V = 4/3 πr³
+          </span>
+        </button>
+
+      </div>
+
+      <!-- Cuadro Dinámico de Explicación de la Fórmula -->
+      <div id="geo-info-box" class="p-4 sm:p-5 rounded-2xl bg-amber-50 border-2 border-amber-300 text-slate-800 text-xs sm:text-sm font-semibold flex items-center justify-between gap-3 mb-6">
+        <div class="flex items-center gap-2.5">
+          <span class="text-2xl">✨</span>
+          <span id="geo-info-text">
+            <strong>Fórmula del Cubo:</strong> V = a³ (Multiplicar el lado o arista por sí mismo tres veces: a × a × a).
+          </span>
+        </div>
+        <span class="text-amber-800 font-black text-xs hidden sm:inline">Fórmula Oficial</span>
+      </div>
+
+      <!-- MINI ACTIVIDAD 3: CALCULADORA GEOMÉTRICA EN VIVO -->
+      <div class="rounded-2xl bg-amber-50/80 border-2 border-amber-200 p-5 sm:p-6">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs font-black uppercase tracking-wider text-amber-900 font-fun flex items-center gap-2">
+            <span>🎮</span> Mini Actividad 3: Calculadora de Volumen en Vivo
+          </span>
+          <span id="calc-vol-badge" class="text-xs font-mono font-bold text-amber-800 bg-amber-200/80 px-2 py-0.5 rounded">Cubo: a = 3 cm</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 items-center">
+          <div class="sm:col-span-2 space-y-2" id="calc-vol-inputs">
+            <div>
+              <label class="text-xs font-bold text-slate-700 block mb-1" id="lbl-param1">Lado del Cubo (a) en cm:</label>
+              <div class="flex items-center gap-3">
+                <input type="range" id="input-param1" min="1" max="15" value="3" oninput="calcularVolumenEnVivo()" class="w-full accent-amber-500" />
+                <span id="val-param1" class="font-mono font-bold text-sm bg-white px-2 py-1 rounded border border-amber-300 min-w-[50px] text-center">3 cm</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white p-4 rounded-xl border border-amber-300 text-center shadow-sm">
+            <span class="text-[11px] font-bold text-slate-500 block">Volumen Calculado:</span>
+            <span id="calc-vol-result" class="text-2xl font-black text-amber-600 font-display">27 cm³</span>
+            <span class="text-[10px] text-slate-400 block font-medium">Espacio ocupado</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ============================================================== -->
+    <!-- 4. SECCIÓN: DENSIDAD (CON TANQUE INTERACTIVO DE FLOTABILIDAD)   -->
+    <!-- ============================================================== -->
+    <section id="densidad" class="scroll-mt-20 bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-card-soft">
+      
+      <div class="flex items-center gap-3 mb-2">
+        <span class="w-10 h-10 rounded-2xl bg-purple-100 text-purple-700 flex items-center justify-center font-black text-base">04</span>
+        <div>
+          <span class="text-xs font-black uppercase tracking-wider text-purple-700 font-fun">La Clave de los Materiales</span>
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 font-display">¿Qué es la Densidad?</h2>
+        </div>
+      </div>
+      <p class="text-slate-700 text-base font-medium mb-6">
+        La <strong>densidad</strong> nos indica cuánta masa existe en un determinado volumen. Es una característica que ayuda a identificar diferentes materiales en la naturaleza.
+      </p>
+
+      <!-- Gran Tarjeta de la Fórmula -->
+      <div class="rounded-3xl bg-gradient-to-r from-purple-50 via-white to-pink-50 border-2 border-purple-200 p-6 sm:p-8 text-center mb-8 shadow-sm">
+        <span class="text-xs font-black uppercase tracking-wider text-purple-700 bg-white px-3.5 py-1 rounded-full border border-purple-200 shadow-sm mb-4 inline-block">
+          Fórmula Maestra
+        </span>
+        
+        <div class="flex items-center justify-center gap-4 text-5xl sm:text-6xl font-black text-slate-900 font-display my-2">
+          <span class="text-purple-600">ρ</span>
+          <span>=</span>
+          <div class="inline-flex flex-col items-center">
+            <span class="border-b-4 border-slate-900 px-4 text-brand-coral">m</span>
+            <span class="text-brand-blue">V</span>
+          </div>
+        </div>
+
+        <div class="mt-4 text-xs sm:text-sm font-bold text-slate-700 flex flex-wrap justify-center gap-4">
+          <span><strong class="text-purple-600">ρ</strong> = densidad</span>
+          <span>·</span>
+          <span><strong class="text-brand-coral">m</strong> = masa</span>
+          <span>·</span>
+          <span><strong class="text-brand-blue">V</strong> = volumen</span>
+        </div>
+
+        <div class="mt-4 pt-4 border-t border-purple-100 flex flex-wrap justify-center gap-3">
+          <span class="bg-white text-slate-800 font-bold text-xs px-3 py-1.5 rounded-xl border border-slate-200 shadow-sm">
+            Unidad común de laboratorio: <strong>g/cm³</strong>
+          </span>
+          <span class="bg-white text-slate-800 font-bold text-xs px-3 py-1.5 rounded-xl border border-slate-200 shadow-sm">
+            Unidad del Sistema Internacional: <strong>kg/m³</strong>
+          </span>
+        </div>
+      </div>
+
+      <!-- Tanque de Flotabilidad e Imagen -->
+      <div class="rounded-3xl border-2 border-sky-200 bg-white p-3 sm:p-4 shadow-sm mb-6">
+        <div class="rounded-2xl overflow-hidden mb-3">
+          <img src="./images/density_materials.jpg" alt="Madera, Aluminio y Oro en agua" class="w-full h-auto max-h-[360px] object-cover rounded-2xl" />
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="p-3 bg-amber-50 rounded-xl border border-amber-200 text-xs">
+            <span class="font-black text-amber-900 flex items-center gap-1.5 mb-1">
+              <img src="./images/icon_madera.png" class="w-5 h-5 object-contain" alt="Madera" /> Madera (0.6 g/cm³)
+            </span>
+            <p class="text-amber-800">Menor que 1.0 g/cm³. <strong>¡Flota alegremente en la superficie!</strong></p>
+          </div>
+          <div class="p-3 bg-slate-100 rounded-xl border border-slate-200 text-xs">
+            <span class="font-black text-slate-900 flex items-center gap-1.5 mb-1">
+              🔩 Aluminio (2.7 g/cm³)
+            </span>
+            <p class="text-slate-700">Mayor que 1.0 g/cm³. Se sumerge en el recipiente.</p>
+          </div>
+          <div class="p-3 bg-amber-100/60 rounded-xl border border-amber-300 text-xs">
+            <span class="font-black text-amber-950 flex items-center gap-1.5 mb-1">
+              <img src="./images/icon_oro.png" class="w-5 h-5 object-contain" alt="Oro" /> Oro (19.3 g/cm³)
+            </span>
+            <p class="text-amber-900">Extremadamente denso. <strong>Se hunde directo al fondo.</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- MINI ACTIVIDAD 4: TANQUE INTERACTIVO "LANZA Y COMPRUEBA FLOTABILIDAD" -->
+      <div class="rounded-2xl bg-purple-50 border-2 border-purple-200 p-5 sm:p-6">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs font-black uppercase tracking-wider text-purple-900 font-fun flex items-center gap-2">
+            <span>🎮</span> Mini Actividad 4: Simulador de Flotabilidad
+          </span>
+          <span class="text-[11px] font-bold text-purple-700">Densidad del Agua = 1.0 g/cm³</span>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-700 font-medium mb-4">
+          Haz clic en cualquier material para lanzarlo al tanque de agua virtual y ver si flota o se hunde:
+        </p>
+
+        <!-- Botones de Lanzamiento -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-4">
+          <button id="btn-float-madera" onclick="lanzarAlTanque('madera')" class="btn-tanque p-3 rounded-xl border border-slate-200 bg-white font-bold text-xs text-slate-800 hover:bg-purple-100 transition shadow-sm flex items-center justify-center gap-1.5">
+            <img src="./images/icon_madera.png" class="w-4 h-4 object-contain" alt="Madera" /> Madera (0.6 g/cm³)
+          </button>
+          <button id="btn-float-hielo" onclick="lanzarAlTanque('hielo')" class="btn-tanque p-3 rounded-xl border border-slate-200 bg-white font-bold text-xs text-slate-800 hover:bg-purple-100 transition shadow-sm flex items-center justify-center gap-1.5">
+            🧊 Hielo (0.92 g/cm³)
+          </button>
+          <button id="btn-float-aluminio" onclick="lanzarAlTanque('aluminio')" class="btn-tanque p-3 rounded-xl border border-slate-200 bg-white font-bold text-xs text-slate-800 hover:bg-purple-100 transition shadow-sm flex items-center justify-center gap-1.5">
+            🔩 Aluminio (2.7 g/cm³)
+          </button>
+          <button id="btn-float-oro" onclick="lanzarAlTanque('oro')" class="btn-tanque p-3 rounded-xl border border-slate-200 bg-white font-bold text-xs text-slate-800 hover:bg-purple-100 transition shadow-sm flex items-center justify-center gap-1.5">
+            <img src="./images/icon_oro.png" class="w-4 h-4 object-contain" alt="Oro" /> Oro (19.3 g/cm³)
+          </button>
+        </div>
+
+        <!-- Tanque de Agua Virtual Animado -->
+        <div class="h-44 w-full bg-slate-900 rounded-2xl p-3 border-2 border-slate-700 relative overflow-hidden flex flex-col justify-end">
+          <!-- Aire / Espacio superior -->
+          <div class="absolute top-2 left-4 text-[10px] font-mono text-slate-400">Atmósfera (Aire)</div>
+          
+          <!-- Agua -->
+          <div class="w-full h-28 water-surface rounded-b-xl relative flex items-center justify-center">
+            <span class="absolute bottom-2 left-4 text-[10px] font-mono text-cyan-200 font-bold">Agua (1.0 g/cm³)</span>
+            
+            <!-- Objeto que cae / flota -->
+            <div id="tanque-objeto" class="floating-item absolute top-1 flex flex-col items-center">
+              <div id="tanque-icono-wrapper" class="flex items-center justify-center h-9">
+                <img src="./images/icon_madera.png" class="w-8 h-8 object-contain drop-shadow-md" alt="Madera" />
+              </div>
+              <span id="tanque-etiqueta" class="text-[9px] font-black text-white bg-slate-900/80 px-2 py-0.5 rounded shadow mt-1">Madera (0.6 g/cm³)</span>
+            </div>
+          </div>
+        </div>
+
+        <div id="tanque-explicacion" class="mt-3 p-3 rounded-xl bg-white border border-purple-200 text-xs font-semibold text-purple-950">
+          ✨ <strong>Madera (0.6 g/cm³):</strong> Al ser menor que 1.0 g/cm³, la fuerza de empuje del agua supera su peso: <strong>¡FLOTA EN LA SUPERFICIE!</strong>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ============================================================== -->
+    <!-- 5. SECCIÓN: ¡VAMOS A CALCULAR! (CON MINI CALCULADORA EN VIVO)  -->
+    <!-- ============================================================== -->
+    <section id="calcular" class="scroll-mt-20 bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-card-soft">
+      
+      <div class="flex items-center gap-3 mb-2">
+        <span class="w-10 h-10 rounded-2xl bg-rose-100 text-rose-700 flex items-center justify-center font-black text-base">05</span>
+        <div>
+          <span class="text-xs font-black uppercase tracking-wider text-rose-700 font-fun">Práctica Paso a Paso</span>
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 font-display">¡Vamos a Calcular!</h2>
+        </div>
+      </div>
+      <p class="text-slate-500 text-sm mb-6">Aprende a aplicar la fórmula con el ejercicio exacto de la tarea escolar:</p>
+
+      <div class="rounded-3xl bg-gradient-to-br from-amber-50/80 via-white to-orange-50/80 border-2 border-amber-200 p-6 sm:p-8 mb-6">
+        
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-12 h-12 rounded-2xl overflow-hidden bg-white p-1 border border-amber-300 shadow-sm flex items-center justify-center">
+            <img src="./images/materia_piedra.jpg" alt="Piedra" class="w-full h-full object-contain" />
+          </div>
+          <div>
+            <h3 class="font-black text-slate-900 text-lg font-display">Ejemplo de la Tarea: Densidad de una Piedra</h3>
+            <p class="text-xs text-slate-600 font-medium">Datos experimentales del laboratorio escolar</p>
+          </div>
+        </div>
+
+        <!-- 3 Cajas del Procedimiento -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+          
+          <div class="bg-white p-4 rounded-2xl border border-slate-200 text-center shadow-sm">
+            <span class="text-xs font-bold text-slate-500 block mb-1">1. Datos medidos:</span>
+            <div class="text-base font-black text-brand-coral">masa = 65 g</div>
+            <div class="text-base font-black text-brand-blue">volumen = 25 cm³</div>
+          </div>
+
+          <div class="bg-white p-4 rounded-2xl border border-slate-200 text-center shadow-sm">
+            <span class="text-xs font-bold text-slate-500 block mb-1">2. Aplicar fórmula:</span>
+            <div class="text-lg font-mono font-black text-purple-700">ρ = m / V</div>
+            <div class="text-base font-mono font-black text-slate-800">ρ = 65 / 25</div>
+          </div>
+
+          <div class="bg-emerald-50 p-4 rounded-2xl border-2 border-emerald-400 text-center shadow-sm">
+            <span class="text-xs font-black text-emerald-800 block mb-1">3. RESULTADO:</span>
+            <div class="text-2xl font-black text-emerald-700 font-display">2.6 g/cm³</div>
+            <span class="text-[10px] text-emerald-800 font-bold">Densidad obtenida</span>
+          </div>
+
+        </div>
+
+        <div class="bg-white rounded-2xl p-4 border border-amber-300 text-center text-sm font-bold text-slate-800 shadow-sm">
+          ✨ <strong>Conclusión:</strong> La densidad de la piedra es <strong>2.6 g/cm³</strong>.
+        </div>
+
+      </div>
+
+      <!-- MINI ACTIVIDAD 5: CALCULADORA LIBRE DE DENSIDAD -->
+      <div class="rounded-2xl bg-rose-50/80 border-2 border-rose-200 p-5 sm:p-6">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs font-black uppercase tracking-wider text-rose-900 font-fun flex items-center gap-2">
+            <span>🎮</span> Mini Actividad 5: Tu Propio Cálculo de Densidad
+          </span>
+          <button id="btn-load-piedra" onclick="cargarDatosPiedra()" class="text-xs font-bold text-rose-700 hover:text-rose-900 bg-white px-3 py-1 rounded-lg border border-rose-300 transition shadow-sm">
+            ↺ Cargar Piedra (65g / 25cm³)
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 items-end">
+          <div>
+            <label class="text-xs font-bold text-slate-700 block mb-1">Masa del objeto (g):</label>
+            <input type="number" id="calc-m-input" value="65" min="1" step="0.5" oninput="calcularDensidadLibre()" class="w-full font-mono font-bold text-base p-2.5 rounded-xl border border-slate-300 bg-white text-slate-800 focus:border-rose-500 focus:outline-none" />
+          </div>
+
+          <div>
+            <label class="text-xs font-bold text-slate-700 block mb-1">Volumen ocupado (cm³):</label>
+            <input type="number" id="calc-v-input" value="25" min="1" step="0.5" oninput="calcularDensidadLibre()" class="w-full font-mono font-bold text-base p-2.5 rounded-xl border border-slate-300 bg-white text-slate-800 focus:border-rose-500 focus:outline-none" />
+          </div>
+
+          <div class="bg-white p-3.5 rounded-xl border-2 border-rose-300 text-center shadow-sm">
+            <span class="text-[11px] font-bold text-slate-500 block">Densidad ρ = m / V:</span>
+            <span id="calc-densidad-output" class="text-2xl font-black text-rose-600 font-display">2.60 g/cm³</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ============================================================== -->
+    <!-- 6. SECCIÓN: OBJETO IRREGULAR (CON PROBETA ANIMADA INTERACTIVA)  -->
+    <!-- ============================================================== -->
+    <section id="probeta" class="scroll-mt-20 bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-card-soft">
+      
+      <div class="flex items-center gap-3 mb-2">
+        <span class="w-10 h-10 rounded-2xl bg-cyan-100 text-cyan-700 flex items-center justify-center font-black text-base">06</span>
+        <div>
+          <span class="text-xs font-black uppercase tracking-wider text-cyan-700 font-fun">Método de Desplazamiento</span>
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 font-display">Objeto Irregular</h2>
+        </div>
+      </div>
+      <p class="text-slate-700 text-base font-medium mb-6">
+        ¿Cómo medir el volumen de algo que no es un cubo ni una esfera? Para conocer el volumen de un objeto irregular podemos utilizar el <strong>desplazamiento de agua</strong>.
+      </p>
+
+      <!-- Los 5 Pasos Exactos de la Tarea Escolar -->
+      <div class="grid grid-cols-1 sm:grid-cols-5 gap-3 mb-8">
+        
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-center flex flex-col justify-between">
+          <span class="w-7 h-7 rounded-full bg-cyan-600 text-white font-black text-xs inline-flex items-center justify-center mx-auto mb-2">1</span>
+          <p class="text-xs font-semibold text-slate-700 leading-snug">Coloca agua en un recipiente graduado.</p>
+        </div>
+
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-center flex flex-col justify-between">
+          <span class="w-7 h-7 rounded-full bg-cyan-600 text-white font-black text-xs inline-flex items-center justify-center mx-auto mb-2">2</span>
+          <p class="text-xs font-semibold text-slate-700 leading-snug">Observa el volumen inicial.</p>
+        </div>
+
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-center flex flex-col justify-between">
+          <span class="w-7 h-7 rounded-full bg-cyan-600 text-white font-black text-xs inline-flex items-center justify-center mx-auto mb-2">3</span>
+          <p class="text-xs font-semibold text-slate-700 leading-snug">Introduce completamente el objeto.</p>
+        </div>
+
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-center flex flex-col justify-between">
+          <span class="w-7 h-7 rounded-full bg-cyan-600 text-white font-black text-xs inline-flex items-center justify-center mx-auto mb-2">4</span>
+          <p class="text-xs font-semibold text-slate-700 leading-snug">Observa el nuevo nivel del agua.</p>
+        </div>
+
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-center flex flex-col justify-between">
+          <span class="w-7 h-7 rounded-full bg-cyan-600 text-white font-black text-xs inline-flex items-center justify-center mx-auto mb-2">5</span>
+          <p class="text-xs font-semibold text-slate-700 leading-snug">Calcula la diferencia.</p>
+        </div>
+
+      </div>
+
+      <!-- Banner del Ejemplo: 30 mL -> 55 mL con Fotografía -->
+      <div class="rounded-3xl border-2 border-cyan-200 bg-white p-3 sm:p-4 shadow-sm mb-6">
+        <div class="rounded-2xl overflow-hidden mb-3">
+          <img src="./images/water_displacement.jpg" alt="Desplazamiento de agua de Arquímedes" class="w-full h-auto max-h-[360px] object-cover rounded-2xl" />
+        </div>
+
+        <div class="p-4 rounded-2xl bg-cyan-50 border border-cyan-200 text-center">
+          <p class="text-sm sm:text-base font-extrabold text-cyan-950">
+            <strong>Ejemplo de la Tarea:</strong> 30 mL → 55 mL.  |  <strong>Diferencia:</strong> 25 mL.  |  <strong>Volumen del objeto:</strong> 25 cm³.
+          </p>
+        </div>
+      </div>
+
+      <!-- MINI ACTIVIDAD 6: SIMULADOR DE LA PROBETA CON BOTÓN "SUMERGIR PIEDRA" -->
+      <div class="rounded-2xl bg-cyan-50 border-2 border-cyan-300 p-5 sm:p-6">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs font-black uppercase tracking-wider text-cyan-900 font-fun flex items-center gap-2">
+            <span>🎮</span> Mini Actividad 6: Sumergir la Piedra en la Probeta
+          </span>
+          <button id="btn-toggle-probeta" onclick="toggleProbetaPiedra()" class="bg-cyan-600 hover:bg-cyan-700 text-white font-black text-xs px-4 py-2 rounded-xl transition shadow flex items-center gap-1.5">
+            <img src="./images/icon_piedra.png" class="w-4 h-4 object-contain inline" alt="Piedra" /> Sumergir la Piedra
+          </button>
+        </div>
+
+        <!-- Probeta Gráfica Interactiva -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+          <div class="bg-slate-900 rounded-2xl p-4 flex items-center justify-center gap-4">
+            <!-- Cilindro de la probeta -->
+            <div class="w-20 h-44 border-x-4 border-b-4 border-cyan-300 rounded-b-xl relative bg-slate-800 flex flex-col justify-end overflow-hidden">
+              <!-- Escala en ml -->
+              <span class="absolute top-2 right-1 text-[8px] font-mono text-slate-400">100ml</span>
+              <span class="absolute top-12 right-1 text-[8px] font-mono text-cyan-300 font-bold" id="mark-55">55ml</span>
+              <span class="absolute top-24 right-1 text-[8px] font-mono text-sky-400 font-bold" id="mark-30">30ml</span>
+              
+              <!-- Nivel de Agua Animado -->
+              <div id="probeta-agua" class="w-full h-[38%] bg-cyan-400/60 border-t-2 border-cyan-200 transition-all duration-700 relative flex items-center justify-center">
+                <!-- Piedra sumergida sin fondo (transparente) -->
+                <img id="probeta-piedra-icon" src="./images/icon_piedra.png" class="w-9 h-9 object-contain opacity-0 transition-opacity duration-500 drop-shadow-md" alt="Piedra sumergida" />
+              </div>
+            </div>
+
+            <!-- Lecturas -->
+            <div class="space-y-2 text-left">
+              <div>
+                <span class="text-[10px] text-slate-400 block font-mono">Volumen inicial:</span>
+                <span class="text-sm font-bold text-sky-400 font-mono">V₁ = 30 mL</span>
+              </div>
+              <div>
+                <span class="text-[10px] text-slate-400 block font-mono">Volumen final:</span>
+                <span id="readout-v2" class="text-sm font-bold text-slate-400 font-mono">V₂ = 30 mL</span>
+              </div>
+              <div class="pt-1 border-t border-slate-700">
+                <span class="text-[10px] text-emerald-400 block font-mono font-bold">Volumen del objeto:</span>
+                <span id="readout-vdif" class="text-base font-black text-emerald-400 font-mono">0 cm³</span>
+              </div>
+            </div>
+          </div>
+
+          <div id="probeta-feedback-box" class="p-4 rounded-xl bg-white border border-cyan-200 text-xs sm:text-sm font-semibold text-slate-700">
+            👉 Presiona el botón <strong>«💧 Sumergir la Piedra»</strong> para ver el desplazamiento de agua en acción y calcular el volumen exacto.
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ============================================================== -->
+    <!-- 7. SECCIÓN: LO QUE DEBES RECORDAR (FLASHCARDS + MINI QUIZ)     -->
+    <!-- ============================================================== -->
+    <section id="recordar" class="scroll-mt-20 bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-card-soft">
+      
+      <div class="flex items-center gap-3 mb-6">
+        <span class="w-10 h-10 rounded-2xl bg-amber-100 text-amber-800 flex items-center justify-center font-black text-base">07</span>
+        <div>
+          <span class="text-xs font-black uppercase tracking-wider text-amber-800 font-fun">Síntesis para Examen</span>
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 font-display">Lo Que Debes Recordar</h2>
+        </div>
+      </div>
+
+      <!-- 5 Tarjetas Resumen Flashcards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+        
+        <!-- Materia -->
+        <div class="bg-posterBlue-light border-2 border-posterBlue-border p-5 rounded-2xl shadow-sm hover:-translate-y-1 transition">
+          <span class="inline-block bg-posterBlue-badge text-white font-black text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-md mb-2">
+            Materia
+          </span>
+          <h4 class="font-black text-slate-900 text-base font-fun mb-1">Forma los objetos</h4>
+          <p class="text-xs text-slate-700 font-medium">Todo aquello que forma los objetos que nos rodean. Tiene masa y ocupa espacio.</p>
+        </div>
+
+        <!-- Masa -->
+        <div class="bg-emerald-50 border-2 border-emerald-200 p-5 rounded-2xl shadow-sm hover:-translate-y-1 transition">
+          <span class="inline-block bg-emerald-700 text-white font-black text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-md mb-2">
+            Masa (kg)
+          </span>
+          <h4 class="font-black text-slate-900 text-base font-fun mb-1">Cantidad de materia</h4>
+          <p class="text-xs text-slate-700 font-medium">Cantidad de materia contenida en un cuerpo. Se mide con balanza.</p>
+        </div>
+
+        <!-- Peso -->
+        <div class="bg-posterWarm-light border-2 border-posterWarm-border p-5 rounded-2xl shadow-sm hover:-translate-y-1 transition">
+          <span class="inline-block bg-posterWarm-badge text-white font-black text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-md mb-2">
+            Peso (N)
+          </span>
+          <h4 class="font-black text-slate-900 text-base font-fun mb-1">Fuerza gravitacional</h4>
+          <p class="text-xs text-slate-700 font-medium">Fuerza que la gravedad ejerce sobre el cuerpo. Se mide con dinamómetro.</p>
+        </div>
+
+        <!-- Volumen -->
+        <div class="bg-amber-50 border-2 border-amber-200 p-5 rounded-2xl shadow-sm hover:-translate-y-1 transition">
+          <span class="inline-block bg-amber-600 text-white font-black text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-md mb-2">
+            Volumen (m³ / cm³)
+          </span>
+          <h4 class="font-black text-slate-900 text-base font-fun mb-1">Espacio ocupado</h4>
+          <p class="text-xs text-slate-700 font-medium">Espacio que ocupa un cuerpo. Puede medirse con fórmulas o desplazamiento de agua.</p>
+        </div>
+
+        <!-- Densidad -->
+        <div class="sm:col-span-2 bg-purple-50 border-2 border-purple-200 p-5 rounded-2xl shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:-translate-y-1 transition">
+          <div>
+            <span class="inline-block bg-purple-700 text-white font-black text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-md mb-2">
+              Densidad (g/cm³)
+            </span>
+            <h4 class="font-black text-slate-900 text-base font-fun mb-1">Relación entre masa y volumen</h4>
+            <p class="text-xs text-slate-700 font-medium">Característica única que distingue y permite identificar a cada material.</p>
+          </div>
+          <div class="shrink-0 bg-white px-4 py-2.5 rounded-xl border border-purple-300 font-mono font-black text-purple-900 text-lg shadow-sm">
+            ρ = m / V
+          </div>
+        </div>
+
+      </div>
+
+      <!-- MINI ACTIVIDAD 7: TEST RÁPIDO DE REPASO FINAL (3 PREGUNTAS) -->
+      <div class="rounded-2xl bg-amber-50 border-2 border-amber-300 p-5 sm:p-7">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-xs font-black uppercase tracking-wider text-amber-900 font-fun flex items-center gap-2">
+            <span>🎮</span> Mini Actividad 7: Autoevaluación Rápida
+          </span>
+          <span id="quiz-repaso-score" class="text-xs font-bold bg-amber-200/90 text-amber-900 px-3 py-1 rounded-full">Progreso: 0 de 3 respondidas</span>
+        </div>
+
+        <div class="space-y-4">
+          <!-- Pregunta 1 -->
+          <div class="p-3.5 bg-white rounded-xl border border-amber-200">
+            <p class="text-xs sm:text-sm font-bold text-slate-800 mb-2">
+              1. Si una persona viaja a la Luna, ¿su masa disminuye?
+            </p>
+            <div class="flex gap-2">
+              <button onclick="responderCheck(1, false, event)" class="btn-check-1 px-3 py-1.5 rounded-lg border border-slate-200 bg-slate-50 text-xs font-bold text-slate-700 hover:bg-slate-100 transition">
+                Sí, disminuye
+              </button>
+              <button onclick="responderCheck(1, true, event)" class="btn-check-1 px-3 py-1.5 rounded-lg border border-slate-200 bg-slate-50 text-xs font-bold text-slate-700 hover:bg-slate-100 transition">
+                No, la masa se mantiene igual
+              </button>
+            </div>
+            <div id="check-fb-1" class="text-[11px] font-bold mt-1.5 hidden"></div>
+          </div>
+
+          <!-- Pregunta 2 -->
+          <div class="p-3.5 bg-white rounded-xl border border-amber-200">
+            <p class="text-xs sm:text-sm font-bold text-slate-800 mb-2">
+              2. La fórmula matemática de la densidad es:
+            </p>
+            <div class="flex gap-2">
+              <button onclick="responderCheck(2, true, event)" class="btn-check-2 px-3 py-1.5 rounded-lg border border-slate-200 bg-slate-50 text-xs font-bold text-slate-700 hover:bg-slate-100 transition">
+                ρ = m / V (Masa dividida entre volumen)
+              </button>
+              <button onclick="responderCheck(2, false, event)" class="btn-check-2 px-3 py-1.5 rounded-lg border border-slate-200 bg-slate-50 text-xs font-bold text-slate-700 hover:bg-slate-100 transition">
+                ρ = m × V (Masa por volumen)
+              </button>
+            </div>
+            <div id="check-fb-2" class="text-[11px] font-bold mt-1.5 hidden"></div>
+          </div>
+
+          <!-- Pregunta 3 -->
+          <div class="p-3.5 bg-white rounded-xl border border-amber-200">
+            <p class="text-xs sm:text-sm font-bold text-slate-800 mb-2">
+              3. Para medir el volumen de un objeto irregular utilizamos:
+            </p>
+            <div class="flex gap-2">
+              <button onclick="responderCheck(3, true, event)" class="btn-check-3 px-3 py-1.5 rounded-lg border border-slate-200 bg-slate-50 text-xs font-bold text-slate-700 hover:bg-slate-100 transition">
+                Desplazamiento de agua en probeta
+              </button>
+              <button onclick="responderCheck(3, false, event)" class="btn-check-3 px-3 py-1.5 rounded-lg border border-slate-200 bg-slate-50 text-xs font-bold text-slate-700 hover:bg-slate-100 transition">
+                Un dinamómetro de resorte
+              </button>
+            </div>
+            <div id="check-fb-3" class="text-[11px] font-bold mt-1.5 hidden"></div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ============================================================== -->
+    <!-- CIERRE Y FOOTER ELEGANTE                                        -->
+    <!-- ============================================================== -->
+    <footer class="rounded-3xl bg-slate-900 text-white p-8 sm:p-12 border border-slate-800 shadow-xl text-center">
+      
+      <div class="max-w-xl mx-auto mb-6">
+        <span class="text-4xl block mb-2">🎓</span>
+        <h3 class="text-2xl sm:text-3xl font-black font-display text-white mb-2">
+          ¡Excelente Trabajo Científico!
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-400 font-medium leading-relaxed">
+          Has completado todos los conceptos y mini actividades de la materia, la diferencia entre masa y peso, el volumen y la densidad.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-center gap-3 mb-8">
+        <button id="btn-footer-print" onclick="window.print()" class="inline-flex items-center gap-2 bg-white text-slate-900 hover:bg-slate-100 font-extrabold text-xs px-5 py-2.5 rounded-xl transition shadow">
+          <span>🖨️</span> Imprimir / Guardar en PDF
+        </button>
+        <a href="#" id="btn-footer-top" class="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs px-5 py-2.5 rounded-xl border border-slate-700 transition">
+          <span>⬆️</span> Volver al Inicio
+        </a>
+      </div>
+
+      <div class="pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+        <span>© Infografía Didáctica e Interactiva · Materia, Masa y Densidad</span>
+        <span>Ciencias Naturales · Física y Química Escolar</span>
+      </div>
+
+    </footer>
+
+  </main>
+
+  <!-- ============================================================== -->
+  <!-- JAVASCRIPT DINÁMICO E INTERACCIONES COMPLETAS                   -->
+  <!-- ============================================================== -->
+  <script>
+    // -------------------------------------------------------------
+    // 1. ACTIVIDAD 1: PREGUNTA EXPLORACIÓN MATERIA Y CLASIFICADOR
+    // -------------------------------------------------------------
+    function responderQuizMateria(idx, e) {
+      const fb = document.getElementById('quiz-materia-feedback');
+      const buttons = document.querySelectorAll('#quiz-materia-opts button');
+
+      // 1. Limpiar y resetear el estado de TODOS los botones primero
+      buttons.forEach((btn) => {
+        btn.className = 'q-mat-btn px-4 py-3 rounded-xl border border-slate-200 bg-white font-bold text-xs sm:text-sm text-slate-700 hover:border-amber-400 hover:bg-amber-50/50 transition flex items-center justify-center gap-1.5 shadow-sm';
+      });
+
+      // 2. Mostrar la caja de feedback
+      fb.classList.remove('hidden');
+
+      // 3. Aplicar estilo activo únicamente al botón presionado
+      const clickedBtn = buttons[idx];
+      if (idx === 3) {
+        clickedBtn.className = 'q-mat-btn px-4 py-3 rounded-xl border-2 border-emerald-500 bg-emerald-50 font-black text-xs sm:text-sm text-emerald-800 shadow-sm transition flex items-center justify-center gap-1.5';
+        fb.className = 'p-3.5 rounded-xl bg-emerald-100 border border-emerald-300 text-emerald-900 font-semibold text-xs sm:text-sm flex items-center gap-2.5 transition';
+        fb.innerHTML = '<span class="text-xl">🎉</span><span><strong>¡RESPUESTA EXACTA!</strong> Piedra, lápiz y botella tienen masa y volumen: ¡Todos los anteriores son cuerpos formados por materia!</span>';
+        soltarConfeti(e);
+      } else {
+        clickedBtn.className = 'q-mat-btn px-4 py-3 rounded-xl border-2 border-amber-500 bg-amber-50 font-black text-xs sm:text-sm text-amber-900 shadow-sm transition flex items-center justify-center gap-1.5';
+        fb.className = 'p-3.5 rounded-xl bg-amber-100 border border-amber-300 text-amber-900 font-semibold text-xs sm:text-sm flex items-center gap-2.5 transition';
+        fb.innerHTML = '<span class="text-xl">🤔</span><span>¡Buen intento! Este objeto sí está formado por materia, pero los otros dos también lo están. ¡Revisa la opción "Todos los anteriores"!</span>';
+      }
+    }
+
+    const infoClasificador = {
+      madera: { tipo: 'Materia', desc: '🪵 <strong>Madera:</strong> Es la sustancia o material básico de origen vegetal (Materia prima).' },
+      mesa: { tipo: 'Cuerpo', desc: '🪑 <strong>Mesa:</strong> Es una porción de madera construida con forma, volumen y límites definidos (Cuerpo).' },
+      oro: { tipo: 'Materia', desc: '✨ <strong>Oro:</strong> Es el elemento químico metálico natural (Materia pura).' },
+      anillo: { tipo: 'Cuerpo', desc: '💍 <strong>Anillo:</strong> Es una porción de oro moldeada con forma circular definida (Cuerpo).' },
+      vidrio: { tipo: 'Materia', desc: '🧪 <strong>Vidrio:</strong> Es el material inorgánico transparente (Materia).' },
+      copa: { tipo: 'Cuerpo', desc: '🥂 <strong>Copa:</strong> Es un objeto de vidrio con límites, forma y función específica (Cuerpo).' },
+    };
+
+    function clasificarItem(item) {
+      const data = infoClasificador[item];
+      if (!data) return;
+
+      // Desactivar ring de selección en los demás botones
+      document.querySelectorAll('.btn-clasif').forEach(btn => {
+        btn.classList.remove('ring-2', 'ring-sky-500', 'border-sky-500', 'bg-sky-50', 'ring-amber-500', 'border-amber-500', 'bg-amber-50');
+      });
+
+      // Resaltar la tarjeta activa
+      const activeBtn = document.getElementById('btn-clasif-' + item);
+      if (activeBtn) {
+        if (data.tipo === 'Materia') {
+          activeBtn.classList.add('ring-2', 'ring-sky-500', 'border-sky-500', 'bg-sky-50');
+        } else {
+          activeBtn.classList.add('ring-2', 'ring-amber-500', 'border-amber-500', 'bg-amber-50');
+        }
+      }
+
+      const badge = document.getElementById('badge-' + item);
+      if (data.tipo === 'Materia') {
+        badge.className = 'text-[10px] font-black text-sky-800 bg-sky-200 px-2 py-0.5 rounded';
+        badge.innerText = 'MATERIA';
+      } else {
+        badge.className = 'text-[10px] font-black text-amber-800 bg-amber-200 px-2 py-0.5 rounded';
+        badge.innerText = 'CUERPO';
+      }
+
+      document.getElementById('clasificador-info').innerHTML = data.desc;
+    }
+
+    // -------------------------------------------------------------
+    // 2. ACTIVIDAD 2: ASTRONAUTA Y SIMULADOR DE GRAVEDAD
+    // -------------------------------------------------------------
+    function toggleAstronauta() {
+      const card = document.getElementById('card-astronauta-detail');
+      card.classList.toggle('hidden');
+    }
+
+    const planetas = {
+      tierra: { g: 9.8, peso: '705.6 N', desc: 'Atracción gravitatoria terrestre normal (g = 9.8 m/s²)' },
+      luna: { g: 1.6, peso: '115.2 N', desc: '¡La gravedad lunar es 6 veces menor! Pesas mucho menos pero tu masa sigue intacta.' },
+      marte: { g: 3.7, peso: '266.4 N', desc: 'Gravedad marciana intermedia (g = 3.7 m/s²). Saltos ágiles.' },
+      espacio: { g: 0.0, peso: '0.0 N', desc: 'Ingravidez total: ¡Flotas libremente! Pero tus 72 kg de materia siguen existiendo.' },
+    };
+
+    function simularGravedad(p) {
+      document.querySelectorAll('.btn-grav').forEach(btn => {
+        btn.className = 'btn-grav p-3 rounded-xl border border-slate-200 bg-white font-bold text-xs text-slate-700 hover:bg-emerald-100 transition text-center shadow-sm';
+      });
+
+      const activeBtn = document.getElementById('btn-grav-' + p);
+      if (activeBtn) {
+        activeBtn.className = 'btn-grav p-3 rounded-xl border-2 border-emerald-500 bg-emerald-50 font-black text-xs text-emerald-900 transition text-center shadow-sm';
+      }
+
+      const info = planetas[p];
+      document.getElementById('sim-masa-val').innerText = '72.0 kg';
+      document.getElementById('sim-peso-val').innerText = info.peso;
+      document.getElementById('sim-peso-desc').innerText = info.desc;
+    }
+
+    // -------------------------------------------------------------
+    // 3. ACTIVIDAD 3: SELECTOR Y CALCULADORA DE VOLUMEN 3D
+    // -------------------------------------------------------------
+    let figuraActual = 'cubo';
+
+    const infoGeometria = {
+      cubo: {
+        text: '<strong>Fórmula del Cubo:</strong> V = a³ (Multiplicar el lado o arista por sí mismo tres veces: a × a × a).',
+        border: 'border-amber-400',
+        bg: 'bg-amber-50/40',
+        badge: 'Cubo: V = a³',
+        lbl: 'Lado del Cubo (a) en cm:',
+        calc: (val) => Math.pow(val, 3)
+      },
+      prisma: {
+        text: '<strong>Fórmula del Prisma Rectangular:</strong> V = largo × ancho × alto (Multiplicar las tres dimensiones).',
+        border: 'border-sky-400',
+        bg: 'bg-sky-50/40',
+        badge: 'Prisma: V = l · w · h',
+        lbl: 'Dimensión base (cm) [largo=val, ancho=5, alto=2]:',
+        calc: (val) => val * 5 * 2
+      },
+      cilindro: {
+        text: '<strong>Fórmula del Cilindro:</strong> V = πr²h (Área del círculo basal por la altura del cilindro).',
+        border: 'border-emerald-400',
+        bg: 'bg-emerald-50/40',
+        badge: 'Cilindro: V = π·r²·h',
+        lbl: 'Radio de la base r (cm) [con altura fija h = 10 cm]:',
+        calc: (val) => Math.round(Math.PI * Math.pow(val, 2) * 10)
+      },
+      esfera: {
+        text: '<strong>Fórmula de la Esfera:</strong> V = ⁴⁄₃ πr³ (Cuatro tercios de pi multiplicado por el radio al cubo).',
+        border: 'border-purple-400',
+        bg: 'bg-purple-50/40',
+        badge: 'Esfera: V = ⁴⁄₃·π·r³',
+        lbl: 'Radio de la Esfera r (cm):',
+        calc: (val) => Math.round((4/3) * Math.PI * Math.pow(val, 3))
+      }
+    };
+
+    function seleccionarFigura(fig) {
+      figuraActual = fig;
+      document.querySelectorAll('.card-geo').forEach(c => {
+        c.className = 'card-geo cursor-pointer bg-slate-50 hover:bg-slate-100/70 border-2 border-slate-200 rounded-2xl p-4 text-center transition shadow-sm hover:-translate-y-1';
+      });
+
+      const sel = document.getElementById('card-geo-' + fig);
+      sel.className = `card-geo cursor-pointer ${infoGeometria[fig].bg} border-2 ${infoGeometria[fig].border} rounded-2xl p-4 text-center transition shadow-sm hover:-translate-y-1`;
+
+      document.getElementById('geo-info-text').innerHTML = infoGeometria[fig].text;
+      document.getElementById('calc-vol-badge').innerText = infoGeometria[fig].badge;
+      document.getElementById('lbl-param1').innerText = infoGeometria[fig].lbl;
+      
+      calcularVolumenEnVivo();
+    }
+
+    function calcularVolumenEnVivo() {
+      const input = document.getElementById('input-param1');
+      const val = parseFloat(input.value) || 1;
+      document.getElementById('val-param1').innerText = val + ' cm';
+
+      const config = infoGeometria[figuraActual];
+      const resultado = config.calc(val);
+      document.getElementById('calc-vol-result').innerText = resultado + ' cm³';
+    }
+
+    // -------------------------------------------------------------
+    // 4. ACTIVIDAD 4: TANQUE DE FLOTABILIDAD
+    // -------------------------------------------------------------
+    const itemsTanque = {
+      madera: {
+        img: './images/icon_madera.png',
+        icono: '🪵',
+        etiqueta: 'Madera (0.6 g/cm³)',
+        top: '6px',
+        explicacion: '✨ <strong>Madera (0.6 g/cm³):</strong> Al tener menor densidad que el agua (0.6 < 1.0), el empuje supera su peso: <strong>¡FLOTA EN LA SUPERFICIE!</strong>'
+      },
+      hielo: {
+        icono: '🧊',
+        etiqueta: 'Hielo (0.92 g/cm³)',
+        top: '20px',
+        explicacion: '✨ <strong>Hielo (0.92 g/cm³):</strong> Es ligeramente menos denso que el agua líquida. <strong>FLOTA CASI SUMERGIDO</strong> (efecto iceberg).'
+      },
+      aluminio: {
+        icono: '🔩',
+        etiqueta: 'Aluminio (2.7 g/cm³)',
+        top: '72px',
+        explicacion: '✨ <strong>Aluminio (2.7 g/cm³):</strong> Mayor densidad que el agua (2.7 > 1.0). Se sumerge con solidez hasta el fondo.'
+      },
+      oro: {
+        img: './images/icon_oro.png',
+        icono: '🪙',
+        etiqueta: 'Oro (19.3 g/cm³)',
+        top: '80px',
+        explicacion: '✨ <strong>Oro (19.3 g/cm³):</strong> Densidad extremadamente alta por su red atómica compacta. <strong>SE HUNDE DIRECTO AL FONDO A GRAN VELOCIDAD.</strong>'
+      }
+    };
+
+    function lanzarAlTanque(mat) {
+      document.querySelectorAll('.btn-tanque').forEach(b => {
+        b.className = 'btn-tanque p-3 rounded-xl border border-slate-200 bg-white font-bold text-xs text-slate-800 hover:bg-purple-100 transition shadow-sm flex items-center justify-center gap-1.5';
+      });
+
+      const activeBtn = document.getElementById('btn-float-' + mat);
+      if (activeBtn) {
+        activeBtn.className = 'btn-tanque p-3 rounded-xl border-2 border-purple-500 bg-purple-50 font-black text-xs text-purple-900 transition shadow-sm flex items-center justify-center gap-1.5';
+      }
+
+      const item = itemsTanque[mat];
+      const objeto = document.getElementById('tanque-objeto');
+      
+      // Animación de caída al tanque
+      objeto.style.top = item.top;
+      const iconWrapper = document.getElementById('tanque-icono-wrapper');
+      if (item.img) {
+        iconWrapper.innerHTML = `<img src="${item.img}" class="w-8 h-8 rounded-lg object-cover shadow-md mx-auto" alt="${mat}" />`;
+      } else {
+        iconWrapper.innerHTML = `<span class="text-3xl">${item.icono}</span>`;
+      }
+      document.getElementById('tanque-etiqueta').innerText = item.etiqueta;
+      document.getElementById('tanque-explicacion').innerHTML = item.explicacion;
+    }
+
+    // -------------------------------------------------------------
+    // 5. ACTIVIDAD 5: CALCULADORA LIBRE DE DENSIDAD
+    // -------------------------------------------------------------
+    function cargarDatosPiedra() {
+      document.getElementById('calc-m-input').value = 65;
+      document.getElementById('calc-v-input').value = 25;
+      calcularDensidadLibre();
+    }
+
+    function calcularDensidadLibre() {
+      const m = parseFloat(document.getElementById('calc-m-input').value) || 0;
+      const v = parseFloat(document.getElementById('calc-v-input').value) || 1;
+
+      if (v <= 0) {
+        document.getElementById('calc-densidad-output').innerText = 'Error (V > 0)';
+        return;
+      }
+
+      const d = (m / v).toFixed(2);
+      document.getElementById('calc-densidad-output').innerText = d + ' g/cm³';
+    }
+
+    // -------------------------------------------------------------
+    // 6. ACTIVIDAD 6: SIMULADOR DE PROBETA DE ARQUÍMEDES
+    // -------------------------------------------------------------
+    let piedraSumergida = false;
+
+    function toggleProbetaPiedra() {
+      const agua = document.getElementById('probeta-agua');
+      const icono = document.getElementById('probeta-piedra-icon');
+      const btn = document.getElementById('btn-toggle-probeta');
+      const v2 = document.getElementById('readout-v2');
+      const vdif = document.getElementById('readout-vdif');
+      const fb = document.getElementById('probeta-feedback-box');
+
+      piedraSumergida = !piedraSumergida;
+
+      if (piedraSumergida) {
+        // Nivel sube a 55 ml
+        agua.style.height = '68%';
+        icono.style.opacity = '1';
+        btn.innerHTML = '<span>↩️</span> Retirar Piedra';
+        btn.className = 'bg-amber-600 hover:bg-amber-700 text-white font-black text-xs px-4 py-2 rounded-xl transition shadow flex items-center gap-1.5';
+        v2.innerText = 'V₂ = 55 mL';
+        vdif.innerText = '25 cm³ (¡25 mL!)';
+        fb.className = 'p-4 rounded-xl bg-cyan-100 border border-cyan-300 text-xs sm:text-sm font-semibold text-cyan-950';
+        fb.innerHTML = '🎉 <strong>¡Piedra Sumergida!</strong> El agua subió de 30 mL a 55 mL. Diferencia: 55 - 30 = <strong>25 mL = 25 cm³</strong>.';
+      } else {
+        // Nivel vuelve a 30 ml
+        agua.style.height = '38%';
+        icono.style.opacity = '0';
+        btn.innerHTML = '<img src="./images/icon_piedra.png" class="w-4 h-4 object-contain inline" alt="Piedra" /> Sumergir la Piedra';
+        btn.className = 'bg-cyan-600 hover:bg-cyan-700 text-white font-black text-xs px-4 py-2 rounded-xl transition shadow flex items-center gap-1.5';
+        v2.innerText = 'V₂ = 30 mL';
+        vdif.innerText = '0 cm³';
+        fb.className = 'p-4 rounded-xl bg-white border border-cyan-200 text-xs sm:text-sm font-semibold text-slate-700';
+        fb.innerHTML = '👉 Presiona <strong>«Sumergir la Piedra»</strong> para volver a experimentar el principio de Arquímedes.';
+      }
+    }
+
+    // -------------------------------------------------------------
+    // 7. ACTIVIDAD 7: TEST RÁPIDO DE REPASO FINAL
+    // -------------------------------------------------------------
+    let checkScores = { 1: false, 2: false, 3: false };
+    let responded = { 1: false, 2: false, 3: false };
+
+    function responderCheck(preg, esCorrecto, e) {
+      responded[preg] = true;
+      checkScores[preg] = esCorrecto;
+
+      const fb = document.getElementById('check-fb-' + preg);
+      fb.classList.remove('hidden');
+
+      const btns = document.querySelectorAll('.btn-check-' + preg);
+      btns.forEach(b => {
+        b.className = `btn-check-${preg} px-3 py-1.5 rounded-lg border border-slate-200 bg-slate-50 text-xs font-bold text-slate-700 hover:bg-slate-100 transition shadow-xs`;
+      });
+
+      const clickedBtn = e.currentTarget;
+      if (esCorrecto) {
+        clickedBtn.className = `btn-check-${preg} px-3 py-1.5 rounded-lg border-2 border-emerald-500 bg-emerald-100 text-xs font-black text-emerald-900 shadow-sm transition`;
+        fb.className = 'text-[11px] font-bold mt-1.5 text-emerald-800';
+        fb.innerHTML = '✅ ¡Correcto!';
+        soltarConfeti(e);
+      } else {
+        clickedBtn.className = `btn-check-${preg} px-3 py-1.5 rounded-lg border-2 border-rose-400 bg-rose-100 text-xs font-black text-rose-900 shadow-sm transition`;
+        fb.className = 'text-[11px] font-bold mt-1.5 text-rose-800';
+        fb.innerHTML = '❌ ¡Inténtalo de nuevo!';
+      }
+
+      // Actualizar score
+      const totalRespondidas = Object.values(responded).filter(Boolean).length;
+      const totalCorrectas = Object.values(checkScores).filter(Boolean).length;
+      document.getElementById('quiz-repaso-score').innerText = `Aciertos: ${totalCorrectas} de ${totalRespondidas}`;
+    }
+
+    // -------------------------------------------------------------
+    // EFECTO CONFETI
+    // -------------------------------------------------------------
+    function soltarConfeti(event) {
+      const paleta = ['#FF6B4A', '#0284C7', '#10B981', '#F59E0B', '#8B5CF6', '#F43F5E'];
+      const rect = event ? event.target.getBoundingClientRect() : { left: window.innerWidth / 2, top: 200, width: 0 };
+      const origX = rect.left + rect.width / 2;
+      const origY = rect.top;
+
+      for (let i = 0; i < 35; i++) {
+        const p = document.createElement('div');
+        p.className = 'confetti-particle';
+        const w = Math.random() * 8 + 6;
+        const h = Math.random() * 6 + 4;
+        p.style.width = w + 'px';
+        p.style.height = h + 'px';
+        p.style.backgroundColor = paleta[Math.floor(Math.random() * paleta.length)];
+        p.style.left = origX + 'px';
+        p.style.top = origY + 'px';
+
+        const angulo = Math.random() * Math.PI * 2;
+        const dist = Math.random() * 140 + 50;
+        const dx = Math.cos(angulo) * dist;
+        const dy = Math.sin(angulo) * dist - 40;
+
+        p.style.setProperty('--dx', dx + 'px');
+        p.style.setProperty('--dy', dy + 'px');
+
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), 800);
+      }
+    }
+  </script>
+
+</body>
+</html>
